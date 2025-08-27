@@ -8,17 +8,33 @@ run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 jobs:
   build-rpm:
     runs-on: ubuntu-latest
+    container:
+      image: fedora:42
     steps:
       - name: Checkout primary repository
         uses: actions/checkout@v4
 
-      - name: Checkout OrcaSlicer
-        uses: actions/checkout@v4
-        with:
-          repository: SoftFever/OrcaSlicer
-          path: OrcaSlicer
-
-      - name: Prepare source files
+      - name: Setup
         run: |
-          mkdir -p SOURCES/your-package-name
-          cp -r another-repo-path/path/to/source/* SOURCES/your-package-name/
+          dnf install -y fedpkg fedora-packager rpmdevtools ncurses-devel pesign \
+          bpftool bc bison dwarves elfutils-devel flex gcc gcc-c++ gcc-plugin-devel \
+          glibc-static hostname m4 make net-tools openssl openssl-devel perl-devel \
+          perl-generators python3-devel which kernel-rpm-macros \
+          && dnf clean all
+
+      - name: setup rpmdevtools
+        run: |
+          pwd
+          ls
+          # rpmdev-setuptree
+
+      # - name: Checkout OrcaSlicer
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: SoftFever/OrcaSlicer
+      #     path: OrcaSlicer
+      #
+      # - name: Prepare source files
+      #   run: |
+      #     mkdir -p SOURCES/orca-slicer
+      #     cp -r another-repo-path/path/to/source/* SOURCES/your-package-name/
