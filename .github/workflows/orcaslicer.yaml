@@ -1,0 +1,24 @@
+name: orcaslicer-rpm
+
+on:
+  workflow_dispatch:
+
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+jobs:
+  build-rpm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout primary repository
+        uses: actions/checkout@v4
+
+      - name: Checkout OrcaSlicer
+        uses: actions/checkout@v4
+        with:
+          repository: SoftFever/OrcaSlicer
+          path: OrcaSlicer
+
+      - name: Prepare source files
+        run: |
+          mkdir -p SOURCES/your-package-name
+          cp -r another-repo-path/path/to/source/* SOURCES/your-package-name/

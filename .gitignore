@@ -1,0 +1,14 @@
+BUILD/
+BUILDROOT/
+RPMS/
+SRPMS/
+SOURCES/
+SPECS/*.spec.tmp # Temporary spec file copies
+*.rpm
+*.src.rpm
+
+# Logs and temporary files
+*.log
+*.bak
+*~
+.#*
