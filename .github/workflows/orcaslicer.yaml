@@ -26,6 +26,10 @@ jobs:
         run: |
           pwd
           ls
+
+          dnf builddep ./SPECS/orca-slicer.spec
+
+          rpmbuild -ba SPECS/orca-slicer.spec
           # rpmdev-setuptree
 
       # - name: Checkout OrcaSlicer
