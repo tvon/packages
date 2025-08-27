@@ -27,7 +27,7 @@ jobs:
           pwd
           ls
 
-          dnf builddep ./SPECS/orca-slicer.spec
+          dnf builddep -y ./SPECS/orca-slicer.spec
 
           rpmbuild -ba SPECS/orca-slicer.spec
           # rpmdev-setuptree
